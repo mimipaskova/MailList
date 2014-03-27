@@ -37,6 +37,15 @@ class MailListFileAdapter():
         if self.mail_list is None:
             self.mail_list = MailList(-1, maillist_name)
 
+        cursor.execute('''CREATE TABLE IF NOT EXISTS maillist
+            (list_id int, list_name text''')
+
+        cursor.execute('''CREATE TABLE IF NOT EXISTS subscribers
+            (sub_id int, name text, email text)''')
+
+        cursor.execute('''CREATE TABLE IF NOT EXISTS m_to_s
+            (list_id int, list_name text''')
+
         file = open(self.get_file_path(), "r")
         contents = file.read()
         file.close()
